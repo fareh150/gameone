@@ -1,0 +1,28 @@
+#root {
+  --letra: whitesmoke;
+  --background: black;
+  max-width: 1280px;
+  text-align: center;
+  margin: 0 auto;
+
+}
+
+body {
+  color: whitesmoke;
+  background-color: black;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+
+main {
+  min-height: calc(100vh - 80px - 60px);
+}

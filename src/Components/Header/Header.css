@@ -1,0 +1,17 @@
+header {
+    display: flex;
+    height: 80px;
+    justify-content: space-between;
+}
+
+header ul {
+    display: flex;
+}
+
+header li {
+    padding: 20px;
+}
+
+header li .active {
+    color: rgb(226, 158, 33);
+}
