@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      <Header title ="Michi"/>
+      <Header title ="ToDoGames"/>
       <Outlet />
       <Footer />
     </>

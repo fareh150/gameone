@@ -1,13 +1,10 @@
-.game {
+.game , .playbox{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .playbox {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 30px;
     flex-wrap: wrap;
 }
@@ -35,6 +32,12 @@
     align-items: center;
 }
 
-.onea {
-    background-color: red;
+.boxbtns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rstbtn {
+    cursor: pointer;
 }
