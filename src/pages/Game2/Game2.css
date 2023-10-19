@@ -1,0 +1,53 @@
+
+
+.gametwo .flagbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 100%;
+}
+
+.gametwo .flagbox img {
+    height: 80%;
+    padding: 5px;
+}
+
+.gametwo .countryOptions {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.gametwo h3 {
+    padding: 20px;
+    cursor: pointer;
+    border-color: rgba(239, 239, 239, 0);
+    transition: all 0.3s ease-in-out;
+}
+
+.gametwo h3:hover {
+    border: 1px solid rgb(239, 239, 239);
+    transition: all 0.3s ease-in-out;
+}
+
+.gametwo .nextbtn {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 15px;
+}
+
+.gametwo .btn {
+    border: 1px solid rgba(101, 101, 101, 0.564);
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.gametwo .btn:hover {
+    border-color:rgba(126, 126, 126, 0.793) ;
+    transition: all 0.3s ease-in-out;
+}
