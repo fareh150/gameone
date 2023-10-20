@@ -3,7 +3,7 @@ import "./NotFound.css"
 const NotFound = () => {
     return(
         <main className="notfound">
-            NotFound
+            pagina de error pegar gift
         </main>
     )
 }

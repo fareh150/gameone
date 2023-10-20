@@ -1,51 +1,134 @@
-import { useContext, useEffect, useState } from "react"
+import {  useEffect, useState } from "react"
 import "./Game2.css"
-import { DataContext } from "../../context/apidata"
+import axios from "axios"
 
 const Game2 = () => {
 
-    const {allData} = useContext(DataContext)
+    const [startGame, setStartGame] = useState(false)
+    const [checkPhase, setCheckPhase] = useState(false)
+    const [btntoCheck, setBtntocheck] = useState("")
+
+    const [allData, setAllData] = useState([])
+
+    const [correct, setCorrect] = useState(0)
+    const [badChoose, setBadChoose] = useState(0)
 
     const [flagData, setFlagData] = useState({})
+    const [optionOne, setOptionOne] = useState({})
+    const [optionTwo, setOptionTwo] = useState({})
+    const [optionTree, setOptionTree] = useState({})
 
-    const [randomChoise , setRandomChoise] = useState(Math.floor(Math.random() * 250)) 
+    const [allOptions, setAllOptions] = useState([])
 
-    
+
+    const [randomChoiseWin , setRandomChoiseWin] = useState(Math.floor(Math.random() * 250)) 
+
+    const [randomChoiseOptionOne , setRandomChoiseOptionOne] = useState(Math.floor(Math.random() * 250)) 
+    const [randomChoiseOptionTwo , setRandomChoiseOptionTwo] = useState(Math.floor(Math.random() * 250)) 
+    const [randomChoiseOptionTree , setRandomChoiseOptionTree] = useState(Math.floor(Math.random() * 250)) 
+
+    const [error , setError] = useState(false)
+
+    const getData = async () => {
+        setError(false)
+        try{
+            const data = await axios.get(`https://restcountries.com/v3.1/all`)
+            setAllData(data.data)
+        } catch (error) {
+            setError(true)
+        }
+        
+    }
+
     const getFlagData = () => {
-        setFlagData(allData)
+        setFlagData(allData[randomChoiseWin])
+        setOptionOne(allData[randomChoiseOptionOne])
+        setOptionTwo(allData[randomChoiseOptionTwo])
+        setOptionTree(allData[randomChoiseOptionTree])
+    }
+
+    const startThegame = () => {
+        setStartGame(true)
+        dataForMap()
+
+    }
+
+    const dataForMap = () => {
+        setAllOptions([flagData.translations.spa.common , optionOne.translations.spa.common , optionTwo.translations.spa.common , optionTree.translations.spa.common])
     }
 
 
 
 
+    useEffect(() => {
+        getData()
+    },[])
 
     useEffect(() => {
         getFlagData()
+    })
 
-        console.log(flagData)
-    },[])
+    const startCheckPhase = (btnclicked) => {
+        setCheckPhase(true)
+        checkF(btnclicked)
+        setBtntocheck(btnclicked)
+    }
+
+
+    const checkF = (btnclicked) => {
+
+        //checkphase poner en tru y empezar a ver las condiciones de si son iguales pintar
+        btnclicked == flagData.translations.spa.common
+        ? setCorrect(correct + 1)
+        :
+        setBadChoose(badChoose + 1)
+    }
+
+    const nextPhase = () => {
+        setCheckPhase(false)
+        setRandomChoiseWin(Math.floor(Math.random() * 250))
+        setRandomChoiseOptionOne(Math.floor(Math.random() * 250))
+        setRandomChoiseOptionTwo(Math.floor(Math.random() * 250))
+        setRandomChoiseOptionTree(Math.floor(Math.random() * 250))
+    }
+    
 
     return(
         <main className="gametwo">
             <h2 className="title">Flag Game</h2>
-            <section className="boardbox">
-                <div className="points">current rate : 0</div>
+            {
+                startGame == false
+                ? <section className="start">
+                    <button onClick={startThegame}>Start Game</button>
+                </section>
+                :
+                <section className="boardbox">
+                <div className="points">current rate : {correct}    error:{badChoose}</div>
                 <article className="playbox">
                     <div className="flagbox">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Flag_of_Peru_%28state%29.svg/2560px-Flag_of_Peru_%28state%29.svg.png" alt="sa" />
+                        <img src={flagData.flags.png} alt="country flag" />
                     </div>
                     <div className="countryOptions">
-                        <h3>Paris</h3>
-                        <h3>Canada</h3>
-                        <h3>Peru</h3>
-                        <h3>Uganda</h3>
+                        {allOptions.sort().map((option) =>(
+                             <h3 key={option} onClick={() =>startCheckPhase(option)} className={checkPhase == true && option == flagData.translations.spa.common
+                            ? "good"
+                            :
+                            checkPhase == true && option == btntoCheck
+                            ? "bad"
+                            :
+                            ""
+                         }>{option}</h3>
+                        ))}
                     </div>
                     <div className="nextbtn">
-                        <div className="btn">next</div>
+                        {checkPhase == false ? "" : <div className="btn" onClick={() => nextPhase()}>next</div>}
+                        
                     </div>
 
                 </article>
             </section>
+            }
+            
         </main>
     )
 }

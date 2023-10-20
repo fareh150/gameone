@@ -19,12 +19,13 @@
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+    min-height: 115px;
 }
 
 .gametwo h3 {
-    padding: 20px;
+    padding: 18px;
     cursor: pointer;
-    border-color: rgba(239, 239, 239, 0);
+    border: 1px solid rgba(239, 239, 239, 0);
     transition: all 0.3s ease-in-out;
 }
 
@@ -50,4 +51,12 @@
 .gametwo .btn:hover {
     border-color:rgba(126, 126, 126, 0.793) ;
     transition: all 0.3s ease-in-out;
+}
+
+.gametwo .good , .gametwo .good:hover{
+    border-color: greenyellow;
+}
+
+.gametwo .bad , .gametwo .bad:hover {
+    border-color: red;
 }
